@@ -8,6 +8,9 @@ RUN npm install
 
 ADD . /app
 RUN chmod +x /app/bin/hubot
+RUN npm config set proxy http://proxylatam.indra.es:8080
+RUN npm config set https-proxy http://proxylatam.indra.es:8080
+RUN npm config set http-proxy http://proxylatam.indra.es:8080
 
 EXPOSE 5000
 ENTRYPOINT bin/hubot -a rocketchat
