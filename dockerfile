@@ -7,6 +7,7 @@ ADD package.json /app
 RUN npm install
 
 ADD . /app
+RUN chmod +x /app/bin/hubot
 
 EXPOSE 80
 ENTRYPOINT bin/hubot -a rocketchat
