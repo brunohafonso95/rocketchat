@@ -9,5 +9,5 @@ RUN npm install
 ADD . /app
 RUN chmod +x /app/bin/hubot
 
-EXPOSE 80
+EXPOSE 5000
 ENTRYPOINT bin/hubot -a rocketchat
