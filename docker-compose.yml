@@ -1,0 +1,39 @@
+version: "2"
+services:
+  cache:
+    image: "redis:latest"
+    expose:
+      - "6379"
+    logging:  
+      driver: "none"
+  db:
+    image: "mongo:latest"
+    logging:
+      driver: "none"
+  chat:
+    image: "rocket.chat:latest"
+    links:
+      - db
+    ports: 
+      - "80:3000"
+    expose:
+      - "3000"
+    environment:
+      - ROOT_URL=http://localhost
+      - MONGO_URL=mongodb://db/mydb
+  bot:
+    build: .
+    links:
+      - cache
+      - chat
+    environment:
+      - REDISCLOUD_URL=redis://cache
+      - ROCKETCHAT_ROOM=general
+      - LISTEN_ON_ALL_PUBLIC=true
+      - ROCKETCHAT_USER=bochat
+      - ROCKETCHAT_PASSWORD=bochat
+      - ROCKETCHAT_AUTH=password
+      - ROCKETCHAT_URL=http://chat:3000
+      - BOT_NAME=bochat
+
+    
