@@ -26,7 +26,7 @@ module.exports = (robot) => {
 
   robot.respond(/mind (.*)$/i, (bot) => {
     robot.http(`https://mind.indra.es/rest/api/content?title=${bot.match[1]}`)
-      .header('Authorization', 'Basic YmhlbnJpcXVlYTpAaW5kcmExMTIwMTg=')
+      .header('Authorization', 'Basic=')
       .get()((err, res, body) => {
         if (err) {
           bot.reply("Erro ao buscar conteúdo no mind")
